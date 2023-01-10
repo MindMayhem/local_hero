@@ -24,14 +24,26 @@ class RenderLocalHeroLeaderLayer extends RenderProxyBox {
       _controller.removeStatusListener(_onAnimationStatusChanged);
       _controller = value;
       _controller.addStatusListener(_onAnimationStatusChanged);
-      markNeedsPaint();
+      if (kDebugMode) {
+        if (!(debugDisposed ?? true)) {
+          markNeedsPaint();
+        }
+      } else {
+        markNeedsPaint();
+      }
     }
   }
 
   void _onAnimationStatusChanged(AnimationStatus status) {
     if (status == AnimationStatus.completed ||
         status == AnimationStatus.dismissed) {
-      markNeedsPaint();
+      if (kDebugMode) {
+        if (!(debugDisposed ?? true)) {
+          markNeedsPaint();
+        }
+      } else {
+        markNeedsPaint();
+      }
     }
   }
 
@@ -101,7 +113,13 @@ class RenderLocalHeroFollowerLayer extends RenderProxyBox {
       _controller.removeListener(markNeedsLayout);
       _controller = value;
       _controller.addListener(markNeedsLayout);
-      markNeedsPaint();
+      if (kDebugMode) {
+        if (!(debugDisposed ?? true)) {
+          markNeedsPaint();
+        }
+      } else {
+        markNeedsPaint();
+      }
     }
   }
 
